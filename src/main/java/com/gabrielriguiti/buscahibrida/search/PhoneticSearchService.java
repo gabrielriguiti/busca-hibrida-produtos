@@ -38,6 +38,7 @@ public class PhoneticSearchService {
                 });
 
         return scored.stream()
+                .filter(s -> s.score > 0)
                 .sorted(Comparator.<ScoredProduct>comparingInt(s -> -s.score)
                         .thenComparing(s -> s.product.id()))
                 .limit(RESULT_LIMIT)

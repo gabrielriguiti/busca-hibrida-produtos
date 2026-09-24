@@ -34,6 +34,17 @@ class PhoneticSearchServiceTest {
         assertThat(results.get(0).id()).isEqualTo(1L);
     }
 
+    @Test
+    void dropsProductsWithNoPhoneticOverlapInsteadOfPaddingResults() throws SQLException {
+        stubProducts(
+                new Object[] {1L, "Furadeira eletrica 500W", "Furadeira de impacto"},
+                new Object[] {2L, "Martelo de borracha", "Martelo com cabeca de borracha"});
+
+        List<ProductResult> results = service.search("furadeira eletrika");
+
+        assertThat(results).hasSize(1);
+    }
+
     private void stubProducts(Object[]... rows) throws SQLException {
         ResultSet rs = mock(ResultSet.class);
         Long[] ids = new Long[rows.length];
