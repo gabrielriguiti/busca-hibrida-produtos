@@ -1,7 +1,7 @@
 ## 1. Documentação de API
 
-- [ ] 1.1 Adicionar a dependência `springdoc-openapi` e anotar os controllers, verificar que a Swagger UI lista `/embed` e `/api/busca`
-- [ ] 1.2 Verificar que o endpoint JSON do OpenAPI devolve um documento válido (ex.: via um validador de schema ou inspeção manual)
+- [x] 1.1 Adicionar a dependência `springdoc-openapi` e anotar os controllers, verificar que a Swagger UI lista `/embed` e `/api/busca`
+- [x] 1.2 Verificar que o endpoint JSON do OpenAPI devolve um documento válido (ex.: via um validador de schema ou inspeção manual)
 
 ## 2. Stack única no Docker Compose
 
