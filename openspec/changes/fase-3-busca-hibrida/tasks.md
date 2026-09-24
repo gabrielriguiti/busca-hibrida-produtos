@@ -10,5 +10,5 @@
 
 ## 3. Reavaliação
 
-- [ ] 3.1 Plugar a busca híbrida no harness de avaliação da fase-2 como uma terceira estratégia, verificar que o harness roda sem modificação no harness em si
-- [ ] 3.2 Rodar a comparação entre as três (fonético/vetorial/híbrido) e registrar os resultados pra tabela do README (fase-5)
+- [x] 3.1 Plugar a busca híbrida no harness de avaliação da fase-2 como uma terceira estratégia, verificar que o harness roda sem modificação no harness em si
+- [x] 3.2 Rodar a comparação entre as três (fonético/vetorial/híbrido) e registrar os resultados pra tabela do README (fase-5)
