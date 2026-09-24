@@ -1,6 +1,7 @@
 package com.gabrielriguiti.buscahibrida.api;
 
 import com.gabrielriguiti.buscahibrida.search.HybridSearchService;
+import com.gabrielriguiti.buscahibrida.search.PhoneticSearchService;
 import com.gabrielriguiti.buscahibrida.search.SearchService;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,9 @@ class SearchControllerTest {
 
     private final SearchService searchService = mock(SearchService.class);
     private final HybridSearchService hybridSearchService = mock(HybridSearchService.class);
-    private final SearchController controller = new SearchController(searchService, hybridSearchService);
+    private final PhoneticSearchService phoneticSearchService = mock(PhoneticSearchService.class);
+    private final SearchController controller =
+            new SearchController(searchService, hybridSearchService, phoneticSearchService);
 
     @Test
     void missingQReturns400() {
@@ -26,7 +29,7 @@ class SearchControllerTest {
                 .isInstanceOf(ResponseStatusException.class)
                 .extracting(e -> ((ResponseStatusException) e).getStatusCode())
                 .isEqualTo(HttpStatus.BAD_REQUEST);
-        verifyNoInteractions(searchService, hybridSearchService);
+        verifyNoInteractions(searchService, hybridSearchService, phoneticSearchService);
     }
 
     @Test
@@ -35,7 +38,7 @@ class SearchControllerTest {
                 .isInstanceOf(ResponseStatusException.class)
                 .extracting(e -> ((ResponseStatusException) e).getStatusCode())
                 .isEqualTo(HttpStatus.BAD_REQUEST);
-        verifyNoInteractions(searchService, hybridSearchService);
+        verifyNoInteractions(searchService, hybridSearchService, phoneticSearchService);
     }
 
     @Test
@@ -44,7 +47,7 @@ class SearchControllerTest {
 
         controller.busca("parafuso", "vetorial");
 
-        verifyNoInteractions(hybridSearchService);
+        verifyNoInteractions(hybridSearchService, phoneticSearchService);
     }
 
     @Test
@@ -54,6 +57,16 @@ class SearchControllerTest {
         Object result = controller.busca("parafuso", "hibrido");
 
         assertThat(result).isEqualTo(List.of());
-        verifyNoInteractions(searchService);
+        verifyNoInteractions(searchService, phoneticSearchService);
+    }
+
+    @Test
+    void phoneticModeDelegatesToPhoneticSearch() {
+        when(phoneticSearchService.search("parafuso")).thenReturn(List.of());
+
+        Object result = controller.busca("parafuso", "fonetico");
+
+        assertThat(result).isEqualTo(List.of());
+        verifyNoInteractions(searchService, hybridSearchService);
     }
 }
