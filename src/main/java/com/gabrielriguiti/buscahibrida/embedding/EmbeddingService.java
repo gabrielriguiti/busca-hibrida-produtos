@@ -1,4 +1,4 @@
-package com.buscahibrida.embedding;
+package com.gabrielriguiti.buscahibrida.embedding;
 
 import ai.djl.MalformedModelException;
 import ai.djl.Model;

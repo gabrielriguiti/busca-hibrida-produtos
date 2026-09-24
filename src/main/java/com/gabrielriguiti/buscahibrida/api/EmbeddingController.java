@@ -1,6 +1,6 @@
-package com.buscahibrida.api;
+package com.gabrielriguiti.buscahibrida.api;
 
-import com.buscahibrida.embedding.EmbeddingService;
+import com.gabrielriguiti.buscahibrida.embedding.EmbeddingService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

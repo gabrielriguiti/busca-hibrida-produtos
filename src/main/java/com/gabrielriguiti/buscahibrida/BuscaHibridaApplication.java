@@ -1,4 +1,4 @@
-package com.buscahibrida;
+package com.gabrielriguiti.buscahibrida;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

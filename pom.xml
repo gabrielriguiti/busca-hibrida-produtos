@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.buscahibrida</groupId>
+    <groupId>com.gabrielriguiti.buscahibrida</groupId>
     <artifactId>busca-hibrida</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>busca-hibrida</name>
