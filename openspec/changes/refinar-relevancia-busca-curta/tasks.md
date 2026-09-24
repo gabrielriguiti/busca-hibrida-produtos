@@ -10,5 +10,5 @@
 
 ## 3. Reavaliação e documentação
 
-- [ ] 3.1 Rodar o harness de avaliação completo (`EvalReportTest`) e confirmar que Recall@10/MRR@10 das três estratégias não regrediu em relação ao último resultado documentado
-- [ ] 3.2 Atualizar `eval-results.md` e a tabela de métricas do README com os números da nova rodada, se tiverem mudado
+- [x] 3.1 Rodar o harness de avaliação completo (`EvalReportTest`) e confirmar que Recall@10/MRR@10 das três estratégias não regrediu em relação ao último resultado documentado
+- [x] 3.2 Atualizar `eval-results.md` e a tabela de métricas do README com os números da nova rodada, se tiverem mudado

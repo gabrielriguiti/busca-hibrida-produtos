@@ -14,7 +14,7 @@ contra o catálogo semente. Gerado pelo harness de avaliação (`EvalReportTest`
 
 | Estratégia | Recall@10 | MRR@10 |
 |---|---|---|
-| fonética (soundex) | 1.0000 | 0.8579 |
+| fonética (soundex) | 1.0000 | 0.8757 |
 | vetorial (e5-small) | 1.0000 | 1.0000 |
 | híbrida (pg_trgm + RRF) | 1.0000 | 1.0000 |
 
@@ -82,14 +82,18 @@ flowchart LR
   busca lexical tolerante a erro de digitação.
 - **As três estratégias de busca**:
   - *Fonética* (Soundex) — ranqueia por quantos tokens da query têm o mesmo código
-    fonético de algum token do produto.
+    fonético de algum token do produto, ignorando tokens cuja parte alfabética (depois de
+    descartar dígitos) tem menos de 3 letras — códigos de produto como "m8"/"m6" reduzem
+    a uma letra só e colidiam por acidente com palavras curtas não relacionadas.
   - *Vetorial* — ordena por distância de cosseno contra o índice HNSW, descartando
     resultados além de um limiar de distância (0.18, calibrado contra os 70 pares
     query→produto esperado do harness) pra não completar 10 resultados só de enchimento
     quando poucos são de fato relevantes.
-  - *Híbrida* — recupera top-50 candidatos lexicais (`pg_trgm`) e top-50 vetoriais, funde
-    os dois rankings com Reciprocal Rank Fusion (`score = Σ 1/(k+rank)`, k=60), e expõe o
-    rank de origem de cada resultado em cada ranking.
+  - *Híbrida* — recupera top-50 candidatos lexicais via `word_similarity`/`<%` do `pg_trgm`
+    (compara a query contra a melhor sub-sequência de palavras do `texto_busca`, não a
+    string inteira — evita diluir queries curtas contra um `texto_busca` longo) e top-50
+    vetoriais, funde os dois rankings com Reciprocal Rank Fusion (`score = Σ 1/(k+rank)`,
+    k=60), e expõe o rank de origem de cada resultado em cada ranking.
 - **Avaliação** (`EvalRunner`/`Metrics`): calcula Recall@10 e MRR@10 sobre 70 queries
   rotuladas (`src/main/resources/eval/queries.json`) contra uma estratégia plugável —
   reaproveitado sem mudança pras três estratégias (ver tabela abaixo).
