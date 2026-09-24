@@ -4,6 +4,8 @@ Motor de busca híbrida de produtos: busca fonética -> busca vetorial -> busca 
 (RRF), cada uma avaliada com números reais de Recall@10/MRR@10 sobre um catálogo
 sintético propositalmente "sujo" (o tipo de dado que um catálogo real de e-commerce tem).
 
+![Demo do toggle de modo de busca](docs/demo.gif)
+
 ## Resultados
 
 Recall@10 e MRR@10 sobre 70 queries rotuladas (`src/main/resources/eval/queries.json`)

@@ -12,4 +12,4 @@
 
 - [x] 3.1 Escrever as seções de declaração do problema e arquitetura, verificar contra a arquitetura de fato implementada (não o plano original, caso tenham divergido)
 - [x] 3.2 Inserir a tabela comparativa de métricas da fase-2/fase-3, verificar que os números batem com a saída da última rodada de avaliação
-- [ ] 3.3 Gravar e incorporar um GIF de demo do toggle de modo do frontend, verificar que ele renderiza no README no GitHub
+- [x] 3.3 Gravar e incorporar um GIF de demo do toggle de modo do frontend, verificar que ele renderiza no README no GitHub
