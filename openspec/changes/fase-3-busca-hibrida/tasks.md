@@ -1,7 +1,7 @@
 ## 1. Candidatos lexicais
 
-- [ ] 1.1 Habilitar a extensão `pg_trgm` e adicionar um índice GIN de trigrama em `texto_busca`, verificar com `EXPLAIN` mostrando uso do índice numa query de similaridade
-- [ ] 1.2 Implementar a recuperação de candidatos lexicais (top-N por similaridade de trigrama), verificar com uma query manual incluindo um erro de digitação
+- [x] 1.1 Habilitar a extensão `pg_trgm` e adicionar um índice GIN de trigrama em `texto_busca`, verificar com `EXPLAIN` mostrando uso do índice numa query de similaridade
+- [x] 1.2 Implementar a recuperação de candidatos lexicais (top-N por similaridade de trigrama), verificar com uma query manual incluindo um erro de digitação
 
 ## 2. Fusão RRF
 

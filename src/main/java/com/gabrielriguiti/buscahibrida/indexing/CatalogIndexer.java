@@ -44,21 +44,26 @@ public class CatalogIndexer {
     }
 
     private void indexBatch(List<Product> batch) {
+        List<String> normalizedTexts = new ArrayList<>(batch.size());
         List<String> prefixedTexts = new ArrayList<>(batch.size());
         for (Product product : batch) {
             String texto = product.description() == null || product.description().isBlank()
                     ? product.name()
                     : product.name() + ". " + product.description();
-            prefixedTexts.add("passage: " + normalizer.normalize(texto));
+            String normalized = normalizer.normalize(texto);
+            normalizedTexts.add(normalized);
+            prefixedTexts.add("passage: " + normalized);
         }
 
         List<float[]> vectors = embeddingService.embedBatch(prefixedTexts);
 
         List<Object[]> updateArgs = new ArrayList<>(batch.size());
         for (int i = 0; i < batch.size(); i++) {
-            updateArgs.add(new Object[] {PgVectorFormat.toLiteral(vectors.get(i)), batch.get(i).id()});
+            updateArgs.add(new Object[] {PgVectorFormat.toLiteral(vectors.get(i)), normalizedTexts.get(i),
+                    batch.get(i).id()});
         }
-        jdbcTemplate.batchUpdate("UPDATE products SET embedding = CAST(? AS vector) WHERE id = ?",
+        jdbcTemplate.batchUpdate(
+                "UPDATE products SET embedding = CAST(? AS vector), texto_busca = ? WHERE id = ?",
                 updateArgs);
     }
 
