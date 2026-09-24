@@ -1,7 +1,7 @@
 ## 1. Normalização
 
-- [ ] 1.1 Implementar o normalizador `texto_busca` (lowercase, remoção de acento via `java.text.Normalizer`) e verificar com um teste unitário em entrada acentuada/caixa mista
-- [ ] 1.2 Adicionar dicionário de abreviações + passo de expansão, verificar com um teste unitário cobrindo cada padrão semeado no dataset da fase-0
+- [x] 1.1 Implementar o normalizador `texto_busca` (lowercase, remoção de acento via `java.text.Normalizer`) e verificar com um teste unitário em entrada acentuada/caixa mista
+- [x] 1.2 Adicionar dicionário de abreviações + passo de expansão, verificar com um teste unitário cobrindo cada padrão semeado no dataset da fase-0
 
 ## 2. Indexação em batch
 
