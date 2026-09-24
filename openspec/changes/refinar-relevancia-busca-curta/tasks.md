@@ -5,8 +5,8 @@
 
 ## 2. Léxico / Híbrido
 
-- [ ] 2.1 Trocar a query de recuperação de candidatos lexicais de `similarity()`/`%` pra `word_similarity()`/`<%` com limiar 0.5, verificar com uma query manual que "meio litro" bate nos 3 óleos e não bate nos parafusos
-- [ ] 2.2 Verificar manualmente contra o catálogo real que `modo=hibrido` pra "meio litro" devolve os 3 óleos com `lexicalRank` preenchido (não só `vectorRank`)
+- [x] 2.1 Trocar a query de recuperação de candidatos lexicais de `similarity()`/`%` pra `word_similarity()`/`<%` com limiar 0.5, verificar com uma query manual que "meio litro" bate nos 3 óleos e não bate nos parafusos
+- [x] 2.2 Verificar manualmente contra o catálogo real que `modo=hibrido` pra "meio litro" devolve os 3 óleos com `lexicalRank` preenchido (não só `vectorRank`)
 
 ## 3. Reavaliação e documentação
 
