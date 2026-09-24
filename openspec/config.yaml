@@ -1,0 +1,40 @@
+schema: spec-driven
+
+context: |
+  Projeto de portfólio: motor de busca híbrida de produtos (backend Java/Spring Boot,
+  frontend React). Problema: um catálogo de produtos real tem abreviações inconsistentes,
+  erros de digitação, e a mesma unidade escrita de 5 jeitos diferentes. O objetivo é mostrar
+  busca fonética -> busca vetorial -> busca híbrida (RRF), cada uma avaliada com números
+  reais de Recall@10/MRR@10, não só uma demo.
+
+  Stack:
+  - Backend: Spring Boot (Java), Docker Compose
+  - Banco: Postgres + pgvector (índice HNSW) + pg_trgm pra busca lexical de trigrama
+  - Embeddings: e5-small (384 dimensões) via DJL ou ONNX Runtime for Java
+  - Frontend: Vite + React + TypeScript (sem Next.js, sem necessidade de SSR)
+  - Docs: README com problema/arquitetura/tabela de métricas/GIF de demo, OpenAPI/Swagger
+
+  Convenções:
+  - Prosa (proposal, design, texto explicativo) em português; identificadores de código,
+    slugs de capability e mensagens de commit ficam em inglês (ver COMMIT_CONVENTION.md) —
+    são o vocabulário que o Java/React/Conventional Commits realmente usam.
+  - Termos estruturais do próprio OpenSpec (Purpose, ADDED/MODIFIED Requirements,
+    Requirement:, Scenario:, WHEN/THEN, SHALL/MUST) ficam em inglês porque são sintaxe da
+    ferramenta, exigida pelo `openspec validate`.
+  - Seis fases (fase-0..fase-5), cada uma planejada como sua própria change do OpenSpec e
+    arquivada em openspec/specs/ assim que implementada.
+
+rules:
+  proposal:
+    - Declarar explicitamente o entregável único da fase no resumo
+  tasks:
+    - Cada task deve mapear pra um ou dois commits, não uma fase inteira numa task só
+
+operations:
+  apply:
+    guidance:
+      - Commitar por task/unidade lógica completada usando o formato Conventional Commits
+        do COMMIT_CONVENTION.md, não um commit gigante por fase
+  archive:
+    guidance:
+      - Resumir o resultado do archive antes de terminar
