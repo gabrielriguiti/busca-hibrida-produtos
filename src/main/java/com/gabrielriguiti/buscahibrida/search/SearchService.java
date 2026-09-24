@@ -27,6 +27,10 @@ public class SearchService {
     }
 
     public List<ProductResult> search(String q) {
+        return search(q, RESULT_LIMIT);
+    }
+
+    public List<ProductResult> search(String q, int limit) {
         String prefixed = "query: " + normalizer.normalize(q);
         float[] queryVector = embeddingService.embed(prefixed);
         String vectorLiteral = PgVectorFormat.toLiteral(queryVector);
@@ -36,7 +40,7 @@ public class SearchService {
                         + "ORDER BY embedding <=> CAST(? AS vector) LIMIT ?",
                 (rs, rowNum) -> new ProductResult(rs.getLong("id"), rs.getString("name"),
                         rs.getString("description")),
-                vectorLiteral, RESULT_LIMIT);
+                vectorLiteral, limit);
     }
 
     public record ProductResult(Long id, String name, String description) {
