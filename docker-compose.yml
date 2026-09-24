@@ -29,6 +29,13 @@ services:
     volumes:
       - model-cache:/app/.cache
 
+  frontend:
+    build: ./frontend
+    depends_on:
+      - app
+    ports:
+      - "8082:80"
+
 volumes:
   postgres-data:
   model-cache:

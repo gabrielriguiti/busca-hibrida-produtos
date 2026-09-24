@@ -5,8 +5,8 @@
 
 ## 2. Stack única no Docker Compose
 
-- [ ] 2.1 Escrever um Dockerfile multi-stage pro frontend, verificar que ele builda e serve o frontend construído localmente
-- [ ] 2.2 Adicionar o serviço de frontend ao `docker-compose.yml` junto com backend e Postgres, verificar que `docker compose up` a partir de um clone limpo sobe os três e o frontend consegue alcançar o backend
+- [x] 2.1 Escrever um Dockerfile multi-stage pro frontend, verificar que ele builda e serve o frontend construído localmente
+- [x] 2.2 Adicionar o serviço de frontend ao `docker-compose.yml` junto com backend e Postgres, verificar que `docker compose up` a partir de um clone limpo sobe os três e o frontend consegue alcançar o backend
 
 ## 3. README e demo
 
