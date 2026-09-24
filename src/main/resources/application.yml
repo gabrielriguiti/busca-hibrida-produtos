@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/busca_hibrida
+    username: busca_hibrida
+    password: busca_hibrida
+
+embedding:
+  cache-dir: .cache/e5-small

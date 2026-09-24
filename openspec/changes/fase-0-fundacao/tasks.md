@@ -1,8 +1,8 @@
 ## 1. Estrutura do repo
 
 - [x] 1.1 Criar app Spring Boot (Maven/Gradle, Java 21) e verificar que `./mvnw spring-boot:run` (ou equivalente gradle) sobe sem nenhum endpoint ainda
-- [ ] 1.2 Escrever `docker-compose.yml` com `app` + `postgres` (imagem pgvector, ex. `pgvector/pgvector:pg16`) e verificar que `docker compose up` sobe os dois containers saudáveis
-- [ ] 1.3 Adicionar uma migration Postgres (Flyway/Liquibase) habilitando a extensão `pgvector` e criando a tabela `products` com uma coluna `vector(384)`, verificar que ela aplica num container novo
+- [x] 1.2 Escrever `docker-compose.yml` com `app` + `postgres` (imagem pgvector, ex. `pgvector/pgvector:pg16`) e verificar que `docker compose up` sobe os dois containers saudáveis
+- [x] 1.3 Adicionar uma migration Postgres (Flyway/Liquibase) habilitando a extensão `pgvector` e criando a tabela `products` com uma coluna `vector(384)`, verificar que ela aplica num container novo
 
 ## 2. Dataset sintético sujo
 
