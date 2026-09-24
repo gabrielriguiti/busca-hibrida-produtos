@@ -1,8 +1,44 @@
 :root {
   color-scheme: light dark;
   font: 16px/1.5 system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  --bg: #f7f7f9;
+  --surface: #ffffff;
+  --border: #e4e4e9;
+  --text: #16171b;
+  --text-muted: #6b6f76;
+  --accent: #4f46e5;
+  --accent-contrast: #ffffff;
+  --chip-lexical-bg: #fef3c7;
+  --chip-lexical-text: #92400e;
+  --chip-vector-bg: #dbeafe;
+  --chip-vector-text: #1e3a8a;
+  --chip-rrf-bg: #ede9fe;
+  --chip-rrf-text: #4c1d95;
+  --shadow: 0 1px 2px rgba(16, 17, 20, 0.06), 0 1px 8px rgba(16, 17, 20, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --surface: #191b21;
+    --border: #2b2e37;
+    --text: #f2f3f5;
+    --text-muted: #9aa0ab;
+    --accent: #818cf8;
+    --accent-contrast: #0f1115;
+    --chip-lexical-bg: #453a13;
+    --chip-lexical-text: #fcd34d;
+    --chip-vector-bg: #1e293b;
+    --chip-vector-text: #93c5fd;
+    --chip-rrf-bg: #2e1f4d;
+    --chip-rrf-text: #c4b5fd;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 8px rgba(0, 0, 0, 0.25);
+  }
 }
 
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
 }
