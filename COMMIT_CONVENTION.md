@@ -4,9 +4,9 @@
 próprio log conte a história do projeto (útil num portfólio: quem revisa dá um
 `git log --oneline` e já vê as fases sendo construídas).
 
-As mensagens em si ficam em inglês — é o vocabulário padrão do Conventional Commits e o que
-qualquer ferramenta de changelog/semantic-release espera —, só a documentação abaixo está em
-português.
+As mensagens ficam em português (decisão do autor do projeto) — só a estrutura
+`<type>(<scope>): <description>` em si segue o vocabulário padrão do Conventional Commits,
+exigido por qualquer ferramenta de changelog/semantic-release.
 
 ```
 <type>(<scope>): <description>
@@ -43,18 +43,18 @@ Um por capability/fase, batendo com os nomes das changes do OpenSpec em `openspe
 ## Exemplos
 
 ```
-feat(embed): add POST /embed returning 384-dim e5-small vectors
-feat(dataset): seed synthetic catalog with inconsistent units and typos
-feat(normalize): expand known abbreviations in texto_busca pipeline
-feat(index): batch-embed catalog in groups of 64 and index with HNSW
-feat(search): add GET /api/busca vector search endpoint
-test(eval): add Recall@10 and MRR@10 calculators
-feat(eval): run phonetic vs vector comparison, record baseline numbers
-feat(hybrid): fuse pg_trgm and vector rankings with RRF
-feat(frontend): add search mode toggle with per-result scores
-docs: add architecture diagram and metrics table to README
-chore(compose): add frontend service to docker-compose.yml
-fix(search): return 400 on empty query instead of embedding empty string
+feat(embed): adiciona POST /embed devolvendo vetores e5-small de 384 dimensoes
+feat(dataset): semeia catalogo sintetico com unidades inconsistentes e erros de digitacao
+feat(normalize): expande abreviacoes conhecidas no pipeline de texto_busca
+feat(index): embeda o catalogo em lotes de 64 e indexa com HNSW
+feat(search): adiciona endpoint GET /api/busca de busca vetorial
+test(eval): adiciona calculo de Recall@10 e MRR@10
+feat(eval): roda comparacao fonetica vs vetorial, registra numeros da baseline
+feat(hybrid): funde rankings pg_trgm e vetorial com RRF
+feat(frontend): adiciona toggle de modo de busca com scores por resultado
+docs: adiciona diagrama de arquitetura e tabela de metricas ao README
+chore(compose): adiciona servico de frontend ao docker-compose.yml
+fix(search): retorna 400 em query vazia em vez de embedar string vazia
 ```
 
 ## Regras
@@ -67,3 +67,5 @@ fix(search): return 400 on empty query instead of embedding empty string
   quando uma fase mudar o contrato de um endpoint que já foi ao ar.
 - Quando um commit fecha uma task do OpenSpec, pode referenciar no corpo, ex.:
   `Closes fase-1 task 3.1`.
+- Commits anteriores à fase-3 ficaram em inglês (convenção original) e não foram reescritos —
+  o histórico não é rebaseado retroativamente só pra mudar idioma.
