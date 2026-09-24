@@ -25,6 +25,11 @@ Java sem chamar Python externamente.
   do e5-small é a parte delicada, não o grafo ONNX em si. Cair pro ONNX Runtime for Java puro
   só se o suporte a tokenizer do DJL não bater com o vocabulário exato do e5-small. Registrar
   aqui a escolha final depois de implementado.
+  **Decisão final**: DJL funcionou (`HuggingFaceTokenizer.newInstance("intfloat/e5-small")`
+  baixa o `tokenizer.json` certo automaticamente). Uma pegadinha: o `OrtNDManager` do engine
+  ONNX Runtime do DJL só executa o grafo, não suporta operações de NDArray (mul/sum/div) —
+  então o mean pooling + normalização L2 do e5 são feitos manualmente em `float[]` no
+  `Translator`, em vez de via NDArray.
 - **Fonte do modelo**: baixar os pesos do e5-small exportados em ONNX do HuggingFace Hub
   (export ONNX do `intfloat/e5-small`) no build/startup, em vez de commitar pesos binários no
   repo.

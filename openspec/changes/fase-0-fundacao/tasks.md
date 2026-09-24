@@ -11,6 +11,6 @@
 
 ## 3. Serviço de embedding
 
-- [ ] 3.1 Adicionar dependência DJL ou ONNX Runtime for Java e carregar o e5-small, verificar que o modelo carrega no startup do app sem erro
-- [ ] 3.2 Implementar `POST /embed` devolvendo `{"vector": [...]}`, verificar com uma chamada curl manual
-- [ ] 3.3 Escrever um teste unitário garantindo que o vetor devolvido tem exatamente 384 dimensões, verificar que passa em CI/execução local
+- [x] 3.1 Adicionar dependência DJL ou ONNX Runtime for Java e carregar o e5-small, verificar que o modelo carrega no startup do app sem erro
+- [x] 3.2 Implementar `POST /embed` devolvendo `{"vector": [...]}`, verificar com uma chamada curl manual
+- [x] 3.3 Escrever um teste unitário garantindo que o vetor devolvido tem exatamente 384 dimensões, verificar que passa em CI/execução local
