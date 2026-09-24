@@ -16,15 +16,15 @@ contra o catálogo semente. Gerado pelo harness de avaliação (`EvalReportTest`
 |---|---|---|
 | fonética (soundex) | 1.0000 | 0.8579 |
 | vetorial (e5-small) | 1.0000 | 1.0000 |
-| híbrida (pg_trgm + RRF) | 1.0000 | 0.9643 |
+| híbrida (pg_trgm + RRF) | 1.0000 | 1.0000 |
 
 Recall@10 bate 100% nas três porque o catálogo semente é pequeno (22 produtos, ~3-5 por
 grupo) — o MRR@10 é onde a diferença aparece: fonética perde posição quando o código
-Soundex de dois produtos do mesmo grupo colide, e a híbrida neste run ficou levemente
-abaixo da vetorial pura porque o HNSW é um índice *aproximado* (a ordem exata pode variar
-um pouco entre reindexações, o que se propaga pro ranking fundido por RRF). Nenhuma
-correção foi feita pra forçar um resultado "mais bonito" — ver design.md da fase-3, que já
-previa esse risco.
+Soundex de dois produtos do mesmo grupo colide (é uma baseline fraca de propósito, ver
+`Soundex.java`). O HNSW é um índice *aproximado* — sua ordem exata pode variar um pouco
+entre reindexações, o que já fez a híbrida oscilar levemente abaixo da vetorial pura num
+run anterior; nenhuma correção foi feita só pra forçar um número mais bonito nesse caso
+(ver design.md da fase-3, que já previa esse risco).
 
 ## Problema
 
@@ -83,7 +83,10 @@ flowchart LR
 - **As três estratégias de busca**:
   - *Fonética* (Soundex) — ranqueia por quantos tokens da query têm o mesmo código
     fonético de algum token do produto.
-  - *Vetorial* — ordena por distância de cosseno contra o índice HNSW.
+  - *Vetorial* — ordena por distância de cosseno contra o índice HNSW, descartando
+    resultados além de um limiar de distância (0.18, calibrado contra os 70 pares
+    query→produto esperado do harness) pra não completar 10 resultados só de enchimento
+    quando poucos são de fato relevantes.
   - *Híbrida* — recupera top-50 candidatos lexicais (`pg_trgm`) e top-50 vetoriais, funde
     os dois rankings com Reciprocal Rank Fusion (`score = Σ 1/(k+rank)`, k=60), e expõe o
     rank de origem de cada resultado em cada ranking.
