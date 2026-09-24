@@ -5,7 +5,7 @@
 
 ## 2. Fusão RRF
 
-- [ ] 2.1 Implementar a fusão RRF combinando os rankings top-N lexical e vetorial, verificar com um teste unitário usando um exemplo pequeno montado à mão com ordem fundida esperada conhecida
+- [x] 2.1 Implementar a fusão RRF combinando os rankings top-N lexical e vetorial, verificar com um teste unitário usando um exemplo pequeno montado à mão com ordem fundida esperada conhecida
 - [ ] 2.2 Adicionar o modo híbrido ao endpoint de busca devolvendo resultados fundidos com scores lexical/vetorial por resultado, verificar com uma chamada curl manual
 
 ## 3. Reavaliação
