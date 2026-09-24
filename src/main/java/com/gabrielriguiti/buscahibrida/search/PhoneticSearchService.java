@@ -18,6 +18,13 @@ public class PhoneticSearchService {
 
     private static final int RESULT_LIMIT = 10;
 
+    /** Tokens cuja parte alfabetica (depois de descartar digitos) fica abaixo disso nao
+     * carregam conteudo fonetico real - sao codigos de produto (ex.: "m8"->"m", "500w"->"w")
+     * que colidem por acidente com palavras curtas sem relacao (ex.: "meio"->M000 == "m8"->
+     * M000). Nenhuma palavra real do catalogo cai abaixo de 3 letras depois de descartar
+     * digitos. */
+    private static final int MIN_PHONETIC_LETTERS = 3;
+
     private final JdbcTemplate jdbcTemplate;
     private final TextNormalizer normalizer;
 
@@ -55,11 +62,15 @@ public class PhoneticSearchService {
     private Set<String> soundexCodes(String text) {
         Set<String> codes = new LinkedHashSet<>();
         for (String token : normalizer.normalize(text).split("\\s+")) {
-            if (!token.isBlank()) {
+            if (hasEnoughPhoneticContent(token)) {
                 codes.add(Soundex.encode(token));
             }
         }
         return codes;
+    }
+
+    private static boolean hasEnoughPhoneticContent(String token) {
+        return token.replaceAll("[^a-z]", "").length() >= MIN_PHONETIC_LETTERS;
     }
 
     private static int overlap(Set<String> a, Set<String> b) {

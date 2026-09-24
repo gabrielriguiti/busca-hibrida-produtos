@@ -45,6 +45,17 @@ class PhoneticSearchServiceTest {
         assertThat(results).hasSize(1);
     }
 
+    @Test
+    void productCodeM8DoesNotCollideWithUnrelatedShortWordMeio() throws SQLException {
+        stubProducts(
+                new Object[] {1L, "Parafuso sextavado M8", "Parafuso sextavado em aco inox"},
+                new Object[] {2L, "Oleo lubrificante WD-40 meio litro", "Oleo multiuso em spray"});
+
+        List<ProductResult> results = service.search("meio litro");
+
+        assertThat(results).extracting(ProductResult::id).containsExactly(2L);
+    }
+
     private void stubProducts(Object[]... rows) throws SQLException {
         ResultSet rs = mock(ResultSet.class);
         Long[] ids = new Long[rows.length];
