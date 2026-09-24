@@ -6,8 +6,8 @@
 
 ## 2. Dataset sintético sujo
 
-- [ ] 2.1 Redigir um checklist dos padrões de "sujeira" a incluir (abreviações, erros de digitação, 5+ variações de unidade) e verificar que o checklist está capturado no rascunho do README
-- [ ] 2.2 Escrever os dados de seed (SQL ou CSV + loader) cobrindo cada padrão do checklist, verificar contagem de linhas e cobertura dos padrões com um script/query rápido
+- [x] 2.1 Redigir um checklist dos padrões de "sujeira" a incluir (abreviações, erros de digitação, 5+ variações de unidade) e verificar que o checklist está capturado no rascunho do README
+- [x] 2.2 Escrever os dados de seed (SQL ou CSV + loader) cobrindo cada padrão do checklist, verificar contagem de linhas e cobertura dos padrões com um script/query rápido
 
 ## 3. Serviço de embedding
 
