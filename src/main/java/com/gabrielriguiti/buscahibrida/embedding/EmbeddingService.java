@@ -15,6 +15,8 @@ import ai.djl.translate.Translator;
 import ai.djl.translate.TranslatorContext;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +37,8 @@ import java.util.Map;
  */
 @Service
 public class EmbeddingService {
+
+    private static final Logger log = LoggerFactory.getLogger(EmbeddingService.class);
 
     private static final String MODEL_URL =
             "https://huggingface.co/intfloat/e5-small/resolve/main/model.onnx";
@@ -55,12 +61,34 @@ public class EmbeddingService {
         predictor = model.newPredictor(new E5Translator());
     }
 
+    /**
+     * Embeda o texto exatamente como recebido - o chamador decide o prefixo assimetrico
+     * do e5 ("passage: " pra indexacao, "query: " pra busca), este metodo nao adiciona
+     * nenhum.
+     */
     public synchronized float[] embed(String text) {
         try {
             return predictor.predict(text);
         } catch (TranslateException e) {
             throw new RuntimeException("Falha ao gerar embedding", e);
         }
+    }
+
+    /**
+     * Embeda uma lista de textos numa unica chamada, contada como "um lote" pro job de
+     * indexacao (ver vector-indexing spec). O DJL Translator abaixo nao faz padding pra
+     * tensor batching de verdade, entao o ganho aqui e de contagem de chamadas/log, nao
+     * de throughput por lote.
+     * ponytail: sem batching real de tensor, ganho de throughput fica pra quando o
+     * volume do catalogo justificar reescrever o Translator com padding.
+     */
+    public synchronized List<float[]> embedBatch(List<String> texts) {
+        log.info("Embedding batch of {} texts", texts.size());
+        List<float[]> vectors = new ArrayList<>(texts.size());
+        for (String text : texts) {
+            vectors.add(embed(text));
+        }
+        return vectors;
     }
 
     @PreDestroy
@@ -110,7 +138,7 @@ public class EmbeddingService {
 
         @Override
         public NDList processInput(TranslatorContext ctx, String input) {
-            Encoding encoding = tokenizer.encode("query: " + input);
+            Encoding encoding = tokenizer.encode(input);
             NDManager manager = ctx.getNDManager();
             Shape shape = new Shape(1, encoding.getIds().length);
             NDArray inputIds = manager.create(encoding.getIds(), shape);
